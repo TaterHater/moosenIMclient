@@ -126,7 +126,7 @@ public class ImGui extends javax.swing.JFrame {
             toServer.writeUTF(message);
             toServer.flush();
      }catch(Exception e){
-         
+          System.out.println(e.getMessage());
      }
      
     }//GEN-LAST:event_sendButtonActionPerformed
@@ -162,11 +162,7 @@ public class ImGui extends javax.swing.JFrame {
         
         });
          //connect to server
-         Socket  csock = new Socket("ServerIP",5001);
-           DataOutputStream toServer = new DataOutputStream(csock.getOutputStream());
-            BufferedReader fromServer = new BufferedReader(new InputStreamReader(csock.getInputStream()));
-            toServer.writeByte(2);
-            toServer.flush();
+         
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
