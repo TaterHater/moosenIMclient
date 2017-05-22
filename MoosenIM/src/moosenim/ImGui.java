@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 
+
 /**
  *
  * @author Nick Beeson
@@ -118,6 +119,15 @@ public class ImGui extends javax.swing.JFrame {
          String m = message.replace("/set username","");
          username = m;
      }
+     try{
+     Socket  csock = new Socket("localhost",5012);
+           DataOutputStream toServer = new DataOutputStream(csock.getOutputStream());
+            BufferedReader fromServer = new BufferedReader(new InputStreamReader(csock.getInputStream()));
+            toServer.writeUTF(message);
+            toServer.flush();
+     }catch(Exception e){
+         
+     }
      
     }//GEN-LAST:event_sendButtonActionPerformed
 
@@ -147,15 +157,16 @@ public class ImGui extends javax.swing.JFrame {
             public void run() {
                 new ImGui().setVisible(true);
             }
-            //connect to server
+           
             
-          Socket  csock = new Socket("ServerIP",5001);
+        
+        });
+         //connect to server
+         Socket  csock = new Socket("ServerIP",5001);
            DataOutputStream toServer = new DataOutputStream(csock.getOutputStream());
             BufferedReader fromServer = new BufferedReader(new InputStreamReader(csock.getInputStream()));
-       
-            
-            
-        });
+            toServer.writeByte(2);
+            toServer.flush();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
